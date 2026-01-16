@@ -1,4 +1,4 @@
-remote-state-pavan-dev {
+terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
