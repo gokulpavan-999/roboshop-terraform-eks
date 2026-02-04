@@ -60,7 +60,66 @@ pipeline {
                 }
             }
         }
-        
+        stage('Parellel Trigger'){
+            parallel {
+                stage('Bastion'){
+                    steps {
+                        script {
+                            build job: '20-bastion',
+                                wait: false, // Wait for completion
+                                propagate: false // Propagate status
+                        }
+                    }
+                }
+                stage('SG Rules'){
+                    steps {
+                        script {
+                            build job: '30-sg-rules',
+                                wait: false, // Wait for completion
+                                propagate: false // Propagate status
+                        }
+                    }
+                }
+                stage('ECR'){
+                    steps {
+                        script {
+                            build job: '40-ecr',
+                                wait: false, // Wait for completion
+                                propagate: false // Propagate status
+                        }
+                    }
+                }
+                stage('ACM'){
+                    steps {
+                        script {
+                            build job: '70-acm',
+                                wait: true, // Wait for completion
+                                propagate: false // Propagate status
+                        }
+                    }
+                }
+                stage('EKS'){
+                    steps {
+                        script {
+                            build job: '90-eks',
+                                wait: false, // Wait for completion
+                                propagate: false // Propagate status
+                        }
+                    }
+                }
+            }
+        }
+        stage('ALB'){
+            steps {
+                script {
+                    build job: '80-frontend-alb',
+                        wait: false, // Wait for completion
+                        propagate: false // Propagate status
+                }
+            }
+        }
+
+    }
     post{
         always{
             echo 'I will always say Hello again!'
