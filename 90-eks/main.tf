@@ -35,7 +35,7 @@ module "eks" {
       create = var.enable_blue
       ami_type       = "AL2023_x86_64_STANDARD"
       kubernetes_version = var.eks_nodegroup_blue_version
-      instance_types = ["m5.xlarge"]
+      instance_types = ["t3.small"]
       iam_role_additional_policies  = {
         amazonEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
         amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
@@ -63,7 +63,7 @@ module "eks" {
       create = var.enable_green
       ami_type       = "AL2023_x86_64_STANDARD"
       kubernetes_version = var.eks_nodegroup_green_version
-      instance_types = ["m5.xlarge"]
+      instance_types = ["t3.small"]
       iam_role_additional_policies  = {
         amazonEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
         amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
