@@ -1,6 +1,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.0" # this is module version
+  version = "~> 6.28" # this is module version
 
   name               = local.common_name_suffix
   # kubernetes_version = "1.33"
